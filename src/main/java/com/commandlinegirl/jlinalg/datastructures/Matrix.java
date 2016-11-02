@@ -1,4 +1,4 @@
-package com.commandlinegirl.jLinalg.datastructures;
+package com.commandlinegirl.jlinalg.datastructures;
 
 interface Matrix {
 

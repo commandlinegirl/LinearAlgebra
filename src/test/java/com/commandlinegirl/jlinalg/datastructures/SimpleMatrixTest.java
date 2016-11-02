@@ -1,4 +1,4 @@
-package com.commandlinegirl.jLinalg.test.datastructures;
+package com.commandlinegirl.jlinalg.datastructures;
 
 import org.junit.Test;
 

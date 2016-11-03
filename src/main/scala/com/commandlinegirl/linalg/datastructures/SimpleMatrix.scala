@@ -7,9 +7,10 @@ class SimpleMatrix(val rowVectors : List[List[Double]]) extends Matrix {
   def size = rowCount * colCount
 
   def *(other : SimpleMatrix) : Matrix = {
-    val transposedRows = for (row <- this.rowVectors)
-      yield for(col <- other.transpose.rowVectors)
-        yield row zip col map Function.tupled(_*_) reduceLeft (_+_)
+    val transposedRows =
+      for (row <- this.rowVectors)
+        yield for(col <- other.transpose.rowVectors)
+          yield row zip col map (x => x._1 * x._2) reduceLeft (_+_)
     new SimpleMatrix(transposedRows)
   }
 

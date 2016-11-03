@@ -14,6 +14,13 @@ class SimpleMatrix(val rowVectors : List[List[Double]]) extends Matrix {
     new SimpleMatrix(transposedRows)
   }
 
+  def *(scalar : Double) : Matrix = {
+    val newRows =
+      for (row <- this.rowVectors)
+        yield row map (x => x * scalar)
+    new SimpleMatrix(newRows)
+  }
+  
   def transpose: SimpleMatrix =
     new SimpleMatrix(rowVectors.transpose)
 

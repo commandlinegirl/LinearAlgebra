@@ -10,15 +10,15 @@ import org.scalatest.junit.JUnitRunner
 class GaussianEliminationTest extends FunSuite {
 
   test("gaussian") {
-    val a = new SimpleMatrix(List(List(1, -1, 0), List(-1, 2, -1), List(0, -1, 2)))
-    val exp = new SimpleMatrix(List(List(1, -1, 0), List(0, 1, -1), List(0, 0, 1)))
+    val a = new SimpleMatrix(Array(Array(1, -1, 0), Array(-1, 2, -1), Array(0, -1, 2)))
+    val exp = new SimpleMatrix(Array(Array(1, -1, 0), Array(0, 1, -1), Array(0, 0, 1)))
     assert(GaussianElimination.gauss(a) == exp)
   }
 
   test("gaussian with zero initial pivot") {
-    val a = new SimpleMatrix(List(List(0, 2, 4), List(3, 2, 5)))
-    val exp = new SimpleMatrix(List(List(3, 2, 5), List(0, 2, 4)))
-    val result = GaussianElimination.gauss(a);
+    val a = new SimpleMatrix(Array(Array(0, 2, 4), Array(3, 2, 5)))
+    val exp = new SimpleMatrix(Array(Array(3, 2, 5), Array(0, 2, 4)))
+    val result = GaussianElimination.gauss(a)
     println(result)
     assert(result == exp)
   }

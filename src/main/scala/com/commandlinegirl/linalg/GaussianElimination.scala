@@ -23,7 +23,7 @@ object GaussianElimination {
         }
       }
     }
-    new SimpleMatrix((rowVectors map (_.toList)).toList)
+    new SimpleMatrix(rowVectors)
   }
 
   def swap(a: Array[Array[Double]], i: Int, j: Int) = {

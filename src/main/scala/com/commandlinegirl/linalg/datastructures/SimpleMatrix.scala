@@ -1,11 +1,11 @@
 package com.commandlinegirl.linalg.datastructures
 
-class SimpleMatrix(val rowVectors : List[List[Double]]) {
+class SimpleMatrix(val rowVectors : Array[Array[Double]]) {
 
-  def rowCount = rowVectors.size
-  def colCount = rowVectors.head.size
+  def rowCount = rowVectors.length
+  def colCount = rowVectors.head.length
   def size = rowCount * colCount
-  def arrayData = (rowVectors map (_.toArray)).toArray
+  def arrayData = rowVectors
 
   def *(other: SimpleMatrix): SimpleMatrix = {
     val transposedRows =
@@ -31,7 +31,7 @@ class SimpleMatrix(val rowVectors : List[List[Double]]) {
   override def equals(that: Any): Boolean =
     that match {
       case that: SimpleMatrix => (that.isInstanceOf[SimpleMatrix]
-        && !((that.rowVectors zip this.rowVectors) exists (x => x._1 != x._2))
+        && that.rowVectors.deep == this.rowVectors.deep
         && this.hashCode == that.hashCode)
       case _ => false
     }
@@ -43,5 +43,5 @@ class SimpleMatrix(val rowVectors : List[List[Double]]) {
   }
 
   override def toString: String =
-    rowVectors mkString " "
+    rowVectors.deep.mkString(" ")
 }

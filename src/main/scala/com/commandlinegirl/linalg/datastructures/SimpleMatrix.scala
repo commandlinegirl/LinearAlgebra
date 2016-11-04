@@ -41,4 +41,7 @@ class SimpleMatrix(val rowVectors : List[List[Double]]) {
     val result = 1
     prime * result + sum.toInt
   }
+
+  override def toString: String =
+    rowVectors mkString " "
 }

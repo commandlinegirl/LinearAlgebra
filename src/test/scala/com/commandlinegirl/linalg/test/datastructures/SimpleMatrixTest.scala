@@ -27,6 +27,6 @@ class SimpleMatrixTest extends FunSuite {
   test("scalar multiplication") {
     val a = new SimpleMatrix(List(List(1.0,2.0), List(3.0,4.0)))
     val scalar = 5
-    assert(a * scalar == new SimpleMatrix(List(List(6, 7),List(8, 9))))
+    assert(a * scalar == new SimpleMatrix(List(List(5, 10),List(15, 20))))
   }
 }

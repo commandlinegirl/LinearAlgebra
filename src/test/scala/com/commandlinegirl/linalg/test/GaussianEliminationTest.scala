@@ -1,7 +1,6 @@
 package com.commandlinegirl.linalg.test
 
-import com.commandlinegirl.linalg.GaussianElimination
-import com.commandlinegirl.linalg.datastructures.SimpleMatrix
+import com.commandlinegirl.linalg.{GaussianElimination, SimpleMatrix}
 import org.junit.runner.RunWith
 import org.scalatest.FunSuite
 import org.scalatest.junit.JUnitRunner

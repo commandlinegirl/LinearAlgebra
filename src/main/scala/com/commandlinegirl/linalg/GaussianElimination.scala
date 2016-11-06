@@ -1,7 +1,5 @@
 package com.commandlinegirl.linalg
 
-import com.commandlinegirl.linalg.datastructures.SimpleMatrix
-
 object GaussianElimination {
 
   /**
@@ -14,7 +12,7 @@ object GaussianElimination {
         if (rowVectors(r)(i).abs > rowVectors(max)(i).abs && rowVectors(r)(i) != 0) r else max)
       swap(rowVectors, maxRow, i)
       val pivot = rowVectors(i)(i)
-      if (pivot != 0) {
+      if (pivot != 0) { //TODO: if pivot == 0, no unique solution, stop, return Option
         for (j <- i + 1 until a.rowCount) {
           val eliminated = rowVectors(j)(i)
           val multiplier = eliminated / pivot

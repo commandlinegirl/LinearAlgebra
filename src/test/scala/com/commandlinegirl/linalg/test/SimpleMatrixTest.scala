@@ -1,6 +1,6 @@
-package com.commandlinegirl.linalg.test.datastructures
+package com.commandlinegirl.linalg.test
 
-import com.commandlinegirl.linalg.datastructures.SimpleMatrix
+import com.commandlinegirl.linalg.SimpleMatrix
 import org.junit.runner.RunWith
 import org.scalatest.FunSuite
 import org.scalatest.junit._
@@ -20,8 +20,8 @@ class SimpleMatrixTest extends FunSuite {
 
   test("multiplication") {
     val a = new SimpleMatrix(Array(Array(1.0,2.0), Array(3.0,4.0)))
-    val b = new SimpleMatrix(Array(Array(0,5),Array(6,7)))
-    assert(a * b == new SimpleMatrix(Array(Array(12, 19),Array(24, 43))))
+    val b = new SimpleMatrix(Array(Array(0,5), Array(6,7)))
+    assert(a * b == new SimpleMatrix(Array(Array(12, 19), Array(24, 43))))
   }
 
   test("scalar multiplication") {

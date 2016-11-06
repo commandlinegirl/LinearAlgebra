@@ -1,4 +1,4 @@
-package com.commandlinegirl.linalg.datastructures
+package com.commandlinegirl.linalg
 
 class SimpleMatrix(val rowVectors : Array[Array[Double]]) {
 
@@ -26,12 +26,18 @@ class SimpleMatrix(val rowVectors : Array[Array[Double]]) {
     new SimpleMatrix(rowVectors.transpose)
 
   def sum: Double =
-    rowVectors map (x => x.sum) reduce (_ + _)
+    rowVectors map (x => x.sum) sum
+
+  def nearEqualMatrix(that: SimpleMatrix): Boolean =
+    rowCount == that.rowCount && (colCount == that.colCount) && (rowVectors.toList.flatten zip that.rowVectors.toList.flatten exists (x => nearEqualDouble(x._1, x._2)))
+
+  def nearEqualDouble(a: Double, b: Double): Boolean =
+    MathOp.~=(a, b, 0.000001)
 
   override def equals(that: Any): Boolean =
     that match {
       case that: SimpleMatrix => (that.isInstanceOf[SimpleMatrix]
-        && that.rowVectors.deep == this.rowVectors.deep
+        && nearEqualMatrix(that)
         && this.hashCode == that.hashCode)
       case _ => false
     }
@@ -44,4 +50,5 @@ class SimpleMatrix(val rowVectors : Array[Array[Double]]) {
 
   override def toString: String =
     rowVectors.deep.mkString(" ")
+
 }

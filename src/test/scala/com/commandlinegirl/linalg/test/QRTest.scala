@@ -24,6 +24,4 @@ class QRTest extends FunSuite {
     assert(result._2 == expR)
   }
 
-
-
 }

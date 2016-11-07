@@ -1,6 +1,6 @@
 package com.commandlinegirl.linalg
 
-import VectorOp._
+import com.commandlinegirl.linalg.MathUtils._
 
 object QR {
 
@@ -12,10 +12,10 @@ object QR {
   def gramSchmidtModified(a: SimpleMatrix): (SimpleMatrix, SimpleMatrix) = {
     val vectors = a.rowVectors.clone()
     for (i <- vectors.indices) {
-      vectors(i) = normalize(vectors(i)).get
+      vectors(i) = vectors(i).normalize.get
       for (j <- i + 1 until vectors.length) {
-        val rij = dot(vectors(i), vectors(j))
-        vectors(j) = subtract(vectors(j), multiply(rij, vectors(i)))
+        val rij = vectors(i) dot vectors(j)
+        vectors(j) = vectors(j) - vectors(i) * rij
       }
     }
     val Q = new SimpleMatrix(vectors)

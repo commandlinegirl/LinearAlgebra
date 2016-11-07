@@ -1,5 +1,7 @@
 package com.commandlinegirl.linalg
 
+import com.commandlinegirl.linalg.MathUtils._
+
 class SimpleMatrix(val rowVectors : Array[Array[Double]]) {
 
   def rowCount = rowVectors.length
@@ -29,24 +31,18 @@ class SimpleMatrix(val rowVectors : Array[Array[Double]]) {
     rowVectors map (x => x.sum) sum
 
   def nearEqualMatrix(that: SimpleMatrix): Boolean =
-    rowCount == that.rowCount && (colCount == that.colCount) && (rowVectors.toList.flatten zip that.rowVectors.toList.flatten exists (x => nearEqualDouble(x._1, x._2)))
-
-  def nearEqualDouble(a: Double, b: Double): Boolean =
-    MathOp.~=(a, b, 0.000001)
+    (rowCount == that.rowCount
+      && colCount == that.colCount
+      && (rowVectors.toList.flatten zip that.rowVectors.toList.flatten exists (x => x._1 nearEqualDouble x._2)))
 
   override def equals(that: Any): Boolean =
     that match {
-      case that: SimpleMatrix => (that.isInstanceOf[SimpleMatrix]
-        && nearEqualMatrix(that)
-        && this.hashCode == that.hashCode)
+      case that: SimpleMatrix => nearEqualMatrix(that)
       case _ => false
     }
 
-  override def hashCode: Int = {
-    val prime = 31
-    val result = 1
-    prime * result + sum.toInt
-  }
+  override def hashCode: Int =
+    rowVectors.flatten.foldLeft(1)((result, a) => result * 31 + a.hashCode())
 
   override def toString: String =
     rowVectors.deep.mkString(" ")

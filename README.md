@@ -1,6 +1,6 @@
 # Linear Algebra
 
-A random collection of notes on linear algebra and implementations of some of the matrix operations.
+Implementation of some of the matrix operations in Scala plus a random collection of notes on linear algebra.
 
 ## Matrix decompositions (implemented [here](https://github.com/commandlinegirl/LinearAlgebra/tree/commandlinegirl-patch-1/src/main/scala/com/commandlinegirl/linalg))
 
@@ -73,13 +73,51 @@ Let V and U be vector spaces over a field K. Then the collection of all linear m
 Dual vector space V* is a collection of all linear functionals on V (together with addition and scalar multiplication). Dual space is also a vector space of K. The dimensions of V and V* are equal. V* itself has its own dual space, called _second dual space_ V**. 
 
 
-## Bilinear form and quadratic form
+## Bilinear, quadratic, sesquilinear, hermitian form
 
-Bilinear form on a finite-dimension vector space V over field K is a mapping f: V x V -> K, which is linear in each of the arguments separately. Example if a dot product function f on Rn.
+### Bilinear form
 
-A matrix B is **congruent** to matrix A if there exists an invertible matrix P such that
+Bilinear form on a finite-dimension vector space V over field K is a mapping f:VxV->K, which is linear in each of the arguments separately. Example is a dot product function on Rn. Matrix representation of _f_ relative to a basis {ei} [1]:
 
-<a href="https://www.codecogs.com/eqnedit.php?latex=B&space;=&space;P^{t}AP" target="_blank"><img src="https://latex.codecogs.com/gif.latex?B&space;=&space;P^{t}AP" title="B = P^{t}AP" /></a>
+Let _f_ be a bilinear form on _V_, and let {e1, ..., en} be a basis of _V_. Suppose that _u_,_v_ belong to _V_ and suppose
+
+<a href="https://www.codecogs.com/eqnedit.php?latex=u&space;=&space;a_1e_1&space;&plus;&space;...&space;&plus;&space;a_ne_n,&space;v&space;=&space;b_1e_1&space;&plus;&space;...&space;&plus;&space;b_ne_n" target="_blank"><img src="https://latex.codecogs.com/gif.latex?u&space;=&space;a_1e_1&space;&plus;&space;...&space;&plus;&space;a_ne_n,&space;v&space;=&space;b_1e_1&space;&plus;&space;...&space;&plus;&space;b_ne_n" title="u = a_1e_1 + ... + a_ne_n, v = b_1e_1 + ... + b_ne_n" /></a>
+
+Then
+
+<a href="https://www.codecogs.com/eqnedit.php?latex=f(u,&space;v)&space;=&space;f(a_1e_1&space;&plus;&space;...&space;&plus;&space;a_ne_n,&space;b_1e_1&space;&plus;&space;...&space;&plus;&space;b_ne_n)&space;=&space;a_1b_1f(e_1,&space;e_1)&space;&plus;&space;a_1b_2f(e_1,&space;e_2)&space;&plus;&space;...&space;&plus;&space;a_nb_nf(e_n,&space;e_n)&space;=&space;\sum&space;^n&space;_{i,j&space;=&space;1}&space;a_ib_if(e_i,e_j)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?f(u,&space;v)&space;=&space;f(a_1e_1&space;&plus;&space;...&space;&plus;&space;a_ne_n,&space;b_1e_1&space;&plus;&space;...&space;&plus;&space;b_ne_n)&space;=&space;a_1b_1f(e_1,&space;e_1)&space;&plus;&space;a_1b_2f(e_1,&space;e_2)&space;&plus;&space;...&space;&plus;&space;a_nb_nf(e_n,&space;e_n)&space;=&space;\sum&space;^n&space;_{i,j&space;=&space;1}&space;a_ib_if(e_i,e_j)" title="f(u, v) = f(a_1e_1 + ... + a_ne_n, b_1e_1 + ... + b_ne_n) = a_1b_1f(e_1, e_1) + a_1b_2f(e_1, e_2) + ... + a_nb_nf(e_n, e_n) = \sum ^n _{i,j = 1} a_ib_if(e_i,e_j)" /></a>
+
+Thus, _f_ is comletely determined by the n^2 values f(ei, ej).
+
+The matrix A = (aij) where aij = f(ei, ej) is called the matrix representation of f relative to a basis {ei}. For all _u_,_v_ belonging to _V_:
+
+<a href="https://www.codecogs.com/eqnedit.php?latex=f(u,&space;v)&space;=&space;\sum&space;^n&space;_{i,j&space;=&space;1}&space;a_ib_if(e_i,e_j)&space;=&space;(a_1,&space;...&space;a_n)&space;A&space;\begin{pmatrix}&space;\\&space;b_1&space;\\&space;b_2&space;\\&space;...&space;\\&space;b_n&space;\end{pmatrix}&space;=&space;\left&space;[&space;u&space;\right&space;]_e&space;^T&space;A&space;\left&space;[&space;v&space;\right&space;]&space;_e" target="_blank"><img src="https://latex.codecogs.com/gif.latex?f(u,&space;v)&space;=&space;\sum&space;^n&space;_{i,j&space;=&space;1}&space;a_ib_if(e_i,e_j)&space;=&space;(a_1,&space;...&space;a_n)&space;A&space;\begin{pmatrix}&space;\\&space;b_1&space;\\&space;b_2&space;\\&space;...&space;\\&space;b_n&space;\end{pmatrix}&space;=&space;\left&space;[&space;u&space;\right&space;]_e&space;^T&space;A&space;\left&space;[&space;v&space;\right&space;]&space;_e" title="f(u, v) = \sum ^n _{i,j = 1} a_ib_if(e_i,e_j) = (a_1, ... a_n) A \begin{pmatrix} \\ b_1 \\ b_2 \\ ... \\ b_n \end{pmatrix} = \left [ u \right ]_e ^T A \left [ v \right ] _e" /></a>
+
+**Congruent matrices** represent the same bilinear form in different bases. A matrix B is congruent to matrix A if there exists an invertible matrix P such that
+
+<a href="https://www.codecogs.com/eqnedit.php?latex=B&space;=&space;P^{T}AP" target="_blank"><img src="https://latex.codecogs.com/gif.latex?B&space;=&space;P^{T}AP" title="B = P^{T}AP" /></a>
+
+### Quadraric form
+
+Quadraric form is a function f:Rn->R of the form
+
+<a href="https://www.codecogs.com/eqnedit.php?latex=f(x)&space;=&space;x^{T}Ax&space;=&space;\sum&space;_{i,j=1}^{n}A_{ij}x_ix_j" target="_blank"><img src="https://latex.codecogs.com/gif.latex?f(x)&space;=&space;x^{T}Ax&space;=&space;\sum&space;_{i,j=1}^{n}A_{ij}x_ix_j" title="f(x) = x^{T}Ax = \sum _{i,j=1}^{n}A_{ij}x_ix_j" /></a>
+
+where A = A^T (A is symmetric).
+
+A mapping q:v->K is a quadratic form if q(v) = f(v, v) for some symmetric bilinear form f on V.
+
+### Sesquilinear form
+
+Sesquilinear form is a generalization of a bilinear form. Bilinear form must be linear in both arguments while sesquilinear form allows one of the arguments to be "twisted" in a [semilinear](https://en.wikipedia.org/wiki/Semilinear_map) manner.
+
+### Hermitian form
+
+Also called a symmetric sesquilinear form, it is a sesquilinear form h:V×V->C such that
+
+<a href="https://www.codecogs.com/eqnedit.php?latex=f(w,&space;z)&space;=&space;\overline{f(z,&space;w)}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?f(w,&space;z)&space;=&space;\overline{f(z,&space;w)}" title="f(w, z) = \overline{f(z, w)}" /></a>
+
+The function _f_ is linear in the first variable but conjugate linear in the second variable. The matrix representation of a complex Hermitian form is a Hermitian matrix, which is a matrix that is equal to its _conjugate transpose_. A real matrix is Hermitian iff it is symmetric.
 
 ## Sylvester's law of intertia
 
@@ -99,3 +137,4 @@ The kernel of T (KerT, null space) is a set of elements in V which map into 0 in
 * Nullity - dimKerT
 * Rank - dimImT
 
+[1] _Theory and Problems of Linear Algebra_, Lipschutz, 1968

@@ -32,6 +32,30 @@ A matrix and its transpose have the same determinant. A matrix and its transpose
 <a href="https://www.codecogs.com/eqnedit.php?latex=|tI&space;-&space;A|&space;=&space;|tI&space;-&space;A^T|" target="_blank"><img src="https://latex.codecogs.com/gif.latex?|tI&space;-&space;A|&space;=&space;|tI&space;-&space;A^T|" title="|tI - A| = |tI - A^T|" /></a>
 
 
+## Normal, unitary, and orthogonal matrix
+
+A matrix is **normal** if it commutes with its conjugate transpose (A*):
+
+<a href="https://www.codecogs.com/eqnedit.php?latex=A^*A&space;=&space;AA^*" target="_blank"><img src="https://latex.codecogs.com/gif.latex?A^*A&space;=&space;AA^*" title="A^*A = AA^*" /></a>
+
+Since for a real matrix a transpose is equal to its conjugate transpose:
+
+<a href="https://www.codecogs.com/eqnedit.php?latex=A^TA&space;=&space;AA^T" target="_blank"><img src="https://latex.codecogs.com/gif.latex?A^TA&space;=&space;AA^T" title="A^TA = AA^T" /></a>
+
+For real matrices all orthogonal, symmetric, and skew-symmetric matrices are normal.
+
+A complex square matrix U is **unitary** if its conjugate transpose U∗ is also its inverse:
+
+<a href="https://www.codecogs.com/eqnedit.php?latex=U^{*}U=UU^{*}=I" target="_blank"><img src="https://latex.codecogs.com/gif.latex?U^{*}U=UU^{*}=I" title="U^{*}U=UU^{*}=I" /></a>
+
+For complex space all unitary matrices are normal. 
+
+**Orthogonal** matrix is an analogue of a unitary matrix in real space. It satisfies:
+
+<a href="https://www.codecogs.com/eqnedit.php?latex=Q^{T}Q=QQ^{T}=I" target="_blank"><img src="https://latex.codecogs.com/gif.latex?Q^{T}Q=QQ^{T}=I" title="Q^{T}Q=QQ^{T}=I" /></a>
+
+<a href="https://www.codecogs.com/eqnedit.php?latex=Q^T&space;=&space;Q^{-1}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?Q^T&space;=&space;Q^{-1}" title="Q^T = Q^{-1}" /></a>
+
 ## Matrix similarity
 
 A is similar to B (A ~ B) if A and B are nxn matrices and there exists a (_change of basis_) matrix P such that:
@@ -137,4 +161,4 @@ The kernel of T (KerT, null space) is a set of elements in V which map into 0 in
 * Nullity - dimKerT
 * Rank - dimImT
 
-[1] _Theory and Problems of Linear Algebra_, Lipschutz, 1968
+[1] Lipschutz, _Theory and Problems of Linear Algebra_, 1968
